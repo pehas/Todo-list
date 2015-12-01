@@ -4,23 +4,17 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
+h1 {
+    margin: 50px;
+}
+
 .todo_form {
     width: 350px;
     margin: 0px auto;
 }
 
-#id_title {
-    width: 100%;
-    padding: 15px;
-}
-
-#button {
-    display: block;
-    margin: 20px 0px;
-    padding: 10px;
-    width: 150px;
-    background: #cccccc;
-    border: none;
+.button {
+    margin: 20px 0;
 }
 
 .list {
@@ -30,4 +24,16 @@ body {
     height: 50px;
     margin: 20px auto;
     text-align: center;
+}
+
+.done {
+    text-decoration: overline;
+}
+
+.filter_todo {
+    margin-bottom: 20px;
+}
+
+ul li {
+    padding-left: 25px;
 }

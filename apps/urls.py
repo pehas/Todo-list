@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^$', 'apps.views.home', name='home'),
     url(r'^results/$', 'apps.views.todos', name='todos'),
     url(r'^(?P<id>\d+)/$', 'apps.views.del_todo', name='del_todo'),
+    url(r'^done/(?P<id>\d+)/$', 'apps.views.done_todo', name='done_todo'),
 
 	# Admin
 	url(r'^admin/', include(admin.site.urls)),

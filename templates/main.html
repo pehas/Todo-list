@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-md-12">
+            <div class="col-sm-10">
                 <div class="checkbox">
                     <label class="checkbox-inline">
                         <input type="checkbox" id="id_personal" name="{{ form.personal.name }}"> Персональная
@@ -27,20 +27,18 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Sign in</button>
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-default button">Создать задачу</button>
             </div>
         </div>
     </form>
 
-    <ul class="nav nav-pills col-md-12">
-        <form action="{% url 'todos' %}" method="get" class="search-form">
-            <li class="all_search">Все задачи</li>
-            <li class="personal_search">Персональные задачи</li>
-            <li class="work_search">Рабочие задачи</li>
-            <input type="hidden" name="personal" value="True" class="personal">
-            <input type="hidden" name="work" value="True" class="work">
-        </form>
+    <ul class="nav nav-pills col-md-5 col-md-offset-4 filter_todo">
+        <li class="all_search">Все задачи</li>
+        <li class="personal_search">Персональные задачи</li>
+        <li class="work_search">Рабочие задачи</li>
+        <input type="hidden" name="personal" value="True" class="personal">
+        <input type="hidden" name="work" value="True" class="work">
     </ul>
     <div class="result_todo col-md-12"></div>
     <script>

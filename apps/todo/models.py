@@ -8,6 +8,7 @@ class Todo(models.Model):
 	created = models.DateTimeField(verbose_name=u'Дата создания', auto_now_add=True)
 	personal = models.BooleanField(verbose_name=u'Персональная задача', default=False)
 	work = models.BooleanField(verbose_name=u'Рабочая задача', default=False)
+	is_done = models.BooleanField(verbose_name=u'Выполнено', default=False)
 
 	def __unicode__(self):
 		return self.title

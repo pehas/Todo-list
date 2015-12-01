@@ -5,7 +5,7 @@
         <th>Задача</th>
         <th>Дата оздания</th>
         <th>Статус</th>
-        <th>Опции</th>
+        <th colspan="2" class="text-center">Опции</th>
     </tr>
     </thead>
     <tbody>
@@ -23,8 +23,12 @@
                     Не выбран
                 {% endif %}
             </td>
-            <td><a href="{% url 'del_todo' todo.id %}" data-id="{{ todo.id }}" data-token="{{ csrf_token }}"
-                   class="del_todo">Удалить</a></td>
+            <td class="text-center"><a href="{% url 'del_todo' todo.id %}" data-id="{{ todo.id }}"
+                                       data-token="{{ csrf_token }}"
+                                       class="del_todo">Удалить</a></td>
+            <td class="text-center"><a href="{% url 'done_todo' todo.id %}" data-id="{{ todo.id }}"
+                                       data-token="{{ csrf_token }}"
+                                       class="done_todo">Выполнено</a></td>
         </tr>
     {% endfor %}
     </tbody>
@@ -46,5 +50,4 @@
             }
         });
     });
-
 </script>

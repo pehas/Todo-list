@@ -9,7 +9,6 @@ from apps.todo.forms import TodoForm
 
 def home(request):
 	context = {}
-	context['todos'] = Todo.objects.all()
 	context['form'] = TodoForm(request.POST or None)
 	if context['form'].is_valid():
 		context['form'].save()
@@ -30,3 +29,14 @@ def todos(request):
 		work = request.GET['work']
 		todos = todos.filter(Q(work=True))
 	return render(request, 'results.html', locals())
+
+
+def done_todo(request, id):
+	context= {}
+	context['todo'] = Todo.objects.get(id=id)
+	if context['todo']:
+		context['todo'].is_done = True
+		context['todo'].save()
+		return HttpResponse('Выполнено')
+	else:
+		return HttpResponse('Что то пошло не так')
