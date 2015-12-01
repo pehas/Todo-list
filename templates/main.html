@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 style="text-align: center">Добавить задачу</h1>
+    <form action="" method="post" class="todo_form">
+        {% csrf_token %}
+        {{ form.errors }}
+        <input type="text" name="{{ form.title.name }}" id="id_title"
+               class="{% if form.title.errors %}title_errors{% endif %}" placeholder="Заголовок задачи"/>
+        <input type="submit" id="button">
+    </form>
+    <br/>
+    {% for todo in todos %}
+        <table class="list">
+            <tr>
+                <th>Задача</th>
+                <th>Дата создания</th>
+                <th>Опции</th>
+                <th>Статус</th>
+            </tr>
+            <tr>
+                <td>{{ todo.title }}</td>
+                <td>{{ todo.created|date:'d-m-Y H:i' }}</td>
+                <td><a href="{% url 'del_todo' todo.id %}" data-id="{{ todo.id }}" data-token="{{ csrf_token }}" class="del_todo">Удалить</a></td>
+                <td class="status_todo">Активна {{ todo.id }}</td>
+            </tr>
+        </table>
+    {% endfor %}
+
+    <script>
+        $('.del_todo').on('click', function(e){
+            e.preventDefault();
+            del = $(this);
+            $.ajax({
+               type: "POST",
+               url: del.attr('href'),
+               data: {
+                   'csrfmiddlewaretoken': del.attr('data-token'),
+                   'data_id': del.attr('data-id')
+                },
+               success: function(response) {
+                $(this).text(response)
+                del.parent().parent().parent().parent().remove()
+            }
+            });
+        });
+    </script>
+{% endblock %}
