@@ -1,0 +1,50 @@
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Задача</th>
+        <th>Дата оздания</th>
+        <th>Статус</th>
+        <th>Опции</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for todo in todos %}
+        <tr class="todo_active">
+            <th scope="row">{{ todo.id }}</th>
+            <td>{{ todo.title }}</td>
+            <td>{{ todo.created|date:'d-m-Y H:i' }}</td>
+            <td class="status_todo">
+                {% if todo.personal %}
+                    Персональная задача
+                {% elif todo.work %}
+                    Рабочая задача
+                {% else %}
+                    Не выбран
+                {% endif %}
+            </td>
+            <td><a href="{% url 'del_todo' todo.id %}" data-id="{{ todo.id }}" data-token="{{ csrf_token }}"
+                   class="del_todo">Удалить</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    $('.del_todo').on('click', function (e) {
+        e.preventDefault();
+        del = $(this);
+        $.ajax({
+            type: "POST",
+            url: del.attr('href'),
+            data: {
+                'csrfmiddlewaretoken': del.attr('data-token'),
+                'data_id': del.attr('data-id')
+            },
+            success: function () {
+                del.parent().parent().remove()
+            }
+        });
+    });
+
+</script>

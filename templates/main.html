@@ -1,47 +1,75 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1 style="text-align: center">Добавить задачу</h1>
-    <form action="" method="post" class="todo_form">
+    <h1 class="text-center">Добавить задачу</h1>
+    <form method="post" class="form-horizontal col-md-5 col-md-offset-4">
         {% csrf_token %}
-        {{ form.errors }}
-        <input type="text" name="{{ form.title.name }}" id="id_title"
-               class="{% if form.title.errors %}title_errors{% endif %}" placeholder="Заголовок задачи"/>
-        <input type="submit" id="button">
+        <div class="form-group  {% if form.title.errors %}has-error{% endif %}">
+            <div class="col-sm-10">
+                {% if form.title.errors %}
+                    <p>Обязательное поле</p>
+                {% endif %}
+                <input type="text" name="{{ form.title.name }}"
+                       id="id_title {% if form.title.errors %}inputError2{% endif %}"
+                       class="form-control col-md-12" placeholder="Заголовок задачи"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="checkbox">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="id_personal" name="{{ form.personal.name }}"> Персональная
+                        задача
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="id_work" name="{{ form.work.name }}"> Рабочая задача
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Sign in</button>
+            </div>
+        </div>
     </form>
-    <br/>
-    {% for todo in todos %}
-        <table class="list">
-            <tr>
-                <th>Задача</th>
-                <th>Дата создания</th>
-                <th>Опции</th>
-                <th>Статус</th>
-            </tr>
-            <tr>
-                <td>{{ todo.title }}</td>
-                <td>{{ todo.created|date:'d-m-Y H:i' }}</td>
-                <td><a href="{% url 'del_todo' todo.id %}" data-id="{{ todo.id }}" data-token="{{ csrf_token }}" class="del_todo">Удалить</a></td>
-                <td class="status_todo">Активна {{ todo.id }}</td>
-            </tr>
-        </table>
-    {% endfor %}
 
+    <ul class="nav nav-pills col-md-12">
+        <form action="{% url 'todos' %}" method="get" class="search-form">
+            <li class="all_search">Все задачи</li>
+            <li class="personal_search">Персональные задачи</li>
+            <li class="work_search">Рабочие задачи</li>
+            <input type="hidden" name="personal" value="True" class="personal">
+            <input type="hidden" name="work" value="True" class="work">
+        </form>
+    </ul>
+    <div class="result_todo col-md-12"></div>
     <script>
-        $('.del_todo').on('click', function(e){
+        $('.personal_search').on('click', function (e) {
             e.preventDefault();
-            del = $(this);
-            $.ajax({
-               type: "POST",
-               url: del.attr('href'),
-               data: {
-                   'csrfmiddlewaretoken': del.attr('data-token'),
-                   'data_id': del.attr('data-id')
-                },
-               success: function(response) {
-                $(this).text(response)
-                del.parent().parent().parent().parent().remove()
-            }
+            $('.personal').prop('checked', true);
+            $('.work').prop('checked', false);
+            $.get('/results/' + '?personal=True', function (response) {
+                $('.result_todo').html(response);
             });
         });
+
+        $('.work_search').on('click', function (e) {
+            e.preventDefault();
+            $('.work').prop('checked', true);
+            $('.personal').prop('checked', false);
+            $.get('/results/' + '?work=True', function (response) {
+                $('.result_todo').html(response);
+            });
+        });
+
+        $('.all_search').on('click', function (e) {
+            e.preventDefault();
+            $('.work').prop('checked', false);
+            $('.personal').prop('checked', false);
+            $.get('/results/', function (response) {
+                $('.result_todo').html(response);
+            });
+        });
+
     </script>
 {% endblock %}

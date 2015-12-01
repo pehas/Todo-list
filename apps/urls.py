@@ -7,11 +7,11 @@ from django.conf.urls.static import static
 urlpatterns = patterns('',
     # Home
     url(r'^$', 'apps.views.home', name='home'),
+    url(r'^results/$', 'apps.views.todos', name='todos'),
     url(r'^(?P<id>\d+)/$', 'apps.views.del_todo', name='del_todo'),
 
 	# Admin
 	url(r'^admin/', include(admin.site.urls)),
-
 )
 
 

@@ -1,4 +1,5 @@
 # coding: utf-8
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 from apps.todo.models import Todo
@@ -18,3 +19,14 @@ def home(request):
 def del_todo(request, id):
 	Todo.objects.get(id=id).delete()
 	return HttpResponse('Задача удалена')
+
+
+def todos(request):
+	todos = Todo.objects.all()
+	if 'personal' in request.GET and request.GET['personal']:
+		personal = request.GET['personal']
+		todos = todos.filter(Q(personal=True))
+	if 'work' in request.GET and request.GET['work']:
+		work = request.GET['work']
+		todos = todos.filter(Q(work=True))
+	return render(request, 'results.html', locals())
