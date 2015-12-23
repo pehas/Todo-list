@@ -14,7 +14,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_DIR = os.path.dirname(os.path.dirname(__file__) + '/../')
 
 #LOGIN AND
-LOGIN_REDIRECT_URL = '/profile/'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
@@ -32,6 +32,19 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'accounts.User'
+
+
+AUTHENTICATION_BACKENDS = [
+    'apps.accounts.auth.EmailOrUsernameModelBackend'
+]
+
+PROXY = True
+PROXY_HOST = 'localhost:8000'
+PROXY_TYPE = 'http'
+PROXY_AUTH = 'express:page'
+
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,10 +53,20 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+	'django.contrib.humanize',
+
+	'django_crontab',
 
     'apps.todo',
+	'apps.diesel',
+	'apps.accounts',
+	'apps.finance',
 )
 
+CRONJOBS = [
+	('*/1 * * * *', 'apps.diesel.management.commands.up.up_user'),
+	('*/1 * * * *', 'apps.cron.up_user')
+]
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -60,6 +83,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+    'apps.finance.context_processors.categories',
 )
 
 SITE_ID = 1

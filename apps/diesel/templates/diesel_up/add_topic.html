@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<h1 class="text-center title_form">Создать тему</h1>
+
+<form method="post" class="form-horizontal col-md-5 col-md-offset-4" action='' onsubmit="yaCounter30149614.reachGoal('add'); return true;">
+	{% csrf_token %}
+    {{ form.errors }}
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="url" name="{{ form.url.name }}" class="form-control" id="id_url" placeholder="Url на diesel.elcat.kg">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="text" name="{{ form.login.name }}" class="form-control" id="id_login" placeholder="Логин на diesel.elcat.kg">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="password" name="{{ form.password.name }}" class="form-control" id="id_password" placeholder="Пароль на diesel.elcat.kg">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-10">
+      <button type="submit" class="btn btn-success col-md-6">Создать</button>
+    </div>
+  </div>
+
+</form>
+
+{% endblock %}

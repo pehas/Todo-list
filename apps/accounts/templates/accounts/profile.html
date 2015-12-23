@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-12 m-template_profile">
+	<div class="b-wrapper">
+	<h1 class="text-center">Профиль</h1>
+		<div class="col-md-4">
+			<ul class="list-group">
+				<li class="list-group-item">{{ user.last_name }} {{ user.first_name }} ( {{ user }} )</li>
+                {% if user.balance %}
+                    <li class="list-group-item">Счет: {{ user.balance }} сом</li>
+                {% else %}
+                    <li class="list-group-item">Счет: 0 сом</li>
+                {% endif %}
+				<li class="list-group-item"><a href="{% url 'edit_profile' %}">Редактировать профиль</a></li>
+				<li class="list-group-item"><a href="{% url 'password_change' %}">Изменить пароль</a></li>
+                {% for company in companies %}
+				    <li class="list-group-item">
+                        <p>{{ company.name }}</p>
+                        <p>{{ company.manager }}</p>
+                        <p>{{ company.address }}</p>
+                        <p>{{ company.phone }}</p>
+                        <p>{{ company.email }}</p>
+                        <p>{{ company.website }}</p>
+                        <a href="{% url 'update_company' company.id %}">Редактировать компанию</a>
+                    </li>
+                {% endfor %}
+                {% if user.company == True %}
+                    {% if user.companies.count == 0 %}
+                        <li class="list-group-item"><a href="{% url 'create_company' %}">Создать компанию</a></li>
+                    {% endif %}
+                {% endif %}
+			</ul>
+		</div>
+		<div class="col-md-8">
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active">
+					<a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">tab1</a>
+				</li>
+				<li role="presentation">
+					<a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">tab2</a>
+				</li>
+				<li role="presentation">
+					<a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">tab3</a>
+				</li>
+				<li role="presentation">
+					<a href="#tab4" aria-controls="tab4" role="tab" data-toggle="tab">tab4</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="tab1">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Заголовок1</th>
+								<th>Заголовок2</th>
+								<th>Заголовок3</th>
+								<th>Заголовок4</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Поле1</td>
+								<td>Поле2</td>
+								<td>Поле3</td>
+								<td>Поле4</td>
+							</tr>
+							<tr>
+								<td>Поле1</td>
+								<td>Поле2</td>
+								<td>Поле3</td>
+								<td>Поле4</td>
+							</tr>
+							<tr>
+								<td>Поле1</td>
+								<td>Поле2</td>
+								<td>Поле3</td>
+								<td>Поле4</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div role="tabpanel" class="tab-pane" id="tab2">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Заголовок1</th>
+								<th>Заголовок2</th>
+								<th>Заголовок3</th>
+								<th>Заголовок4</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Поле1</td>
+								<td>Поле2</td>
+								<td>Поле3</td>
+								<td>Поле4</td>
+							</tr>
+							<tr>
+								<td>Поле1</td>
+								<td>Поле2</td>
+								<td>Поле3</td>
+								<td>Поле4</td>
+							</tr>
+							<tr>
+								<td>Поле1</td>
+								<td>Поле2</td>
+								<td>Поле3</td>
+								<td>Поле4</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div role="tabpanel" class="tab-pane" id="tab3">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Заголовок1</th>
+								<th>Заголовок2</th>
+								<th>Заголовок3</th>
+								<th>Заголовок4</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Поле1</td>
+								<td>Поле2</td>
+								<td>Поле3</td>
+								<td>Поле4</td>
+							</tr>
+							<tr>
+								<td>Поле1</td>
+								<td>Поле2</td>
+								<td>Поле3</td>
+								<td>Поле4</td>
+							</tr>
+							<tr>
+								<td>Поле1</td>
+								<td>Поле2</td>
+								<td>Поле3</td>
+								<td>Поле4</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div role="tabpanel" class="tab-pane" id="tab4">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Заголовок1</th>
+								<th>Заголовок2</th>
+								<th>Заголовок3</th>
+								<th>Заголовок4</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Поле1</td>
+								<td>Поле2</td>
+								<td>Поле3</td>
+								<td>Поле4</td>
+							</tr>
+							<tr>
+								<td>Поле1</td>
+								<td>Поле2</td>
+								<td>Поле3</td>
+								<td>Поле4</td>
+							</tr>
+							<tr>
+								<td>Поле1</td>
+								<td>Поле2</td>
+								<td>Поле3</td>
+								<td>Поле4</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %}
+{% if user.company == True %}
+    {% if user.companies.count == 0 %}
+        <a href="{% url 'create_company' %}">Создать компанию</a>
+    {% endif %}
+{% endif %}
+    <div class="col-md-12">
+        <h1>Настройки юзера</h1>
+        <p>{{ user }}</p>
+        <p>{{ user.first_name }}</p>
+        <p>{{ user.last_name }}</p>
+        <p>{{ user.balance }}</p>
+        <p>{{ user.email }}</p>
+        <p>{{ user.phone }}</p>
+        <p>г. {{ user.sity }}, ул. {{ user.street }}, д. {{ user.home }}</p>
+        <a href="{% url 'edit_profile' user.id %}">Редактировать</a>
+    </div>
+    <div class="col-md-12">
+        <h1>Компания</h1>
+        {% for company in companies %}
+            <p>{{ company.name }}</p>
+            <p>{{ company.address }}</p>
+            <p>{{ company.phone }}</p>
+            <p>{{ company.email }}</p>
+            <p>{{ company.website }}</p>
+            <a href="">Редактировать</a>
+        {% endfor %}
+    </div>
+
+    <div class="col-md-12">
+        <h1>Участие в лотах</h1>
+        {% for price in prices %}
+            <p>{{ price.lot }}</p>
+            <a href="{% url 'lot_item' price.lot.category.slug price.lot.slug %}">Ссылка на лот</a>
+            <a href="">Удалить</a>
+        {% endfor %}
+    </div>
+
+    <div class="col-md-12">
+        <h1>Купоны</h1>
+        {% for ticket in tickets %}
+            <p>{{ ticket.date|date:'d.m.Y H:m' }}</p>
+            <p>{{ ticket.lot }}</p>
+            <p>{{ ticket.price }}</p>
+            {% if ticket.file %}
+                <a href="{{ ticket.file.url }}">Скачать</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endcomment %}
+{% endblock %}

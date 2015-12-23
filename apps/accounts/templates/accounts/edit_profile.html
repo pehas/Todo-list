@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="b-wrapper m-app_accounts m-template_singup">
+	<h1 class="text-center title_form">Редактировать профиль</h1>
+
+    <form method="post" action="" class="form-horizontal form">
+        {% csrf_token %}
+        {{ form.errors }}
+        <div class="form-group first_name">
+            <label for="id_first_name">Имя</label>
+            <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                <input type="text" name="{{ form.first_name.name }}" class="form-control" id="id_first_name" value="{{ form.first_name.value }}">
+            </div>
+        </div>
+        <div class="form-group last_name">
+            <label for="id_last_name">Фамилия</label>
+            <div class="input-group last_name">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                <input type="text" name="{{ form.last_name.name }}" class="form-control" id="id_last_name" value="{{ form.last_name.value }}">
+            </div>
+        </div>
+        <div class="form-group email">
+            <label for="id_email">Электронная почта</label>
+            <div class="input-group email">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+                <input type="email" name="{{ form.email.name }}" required="" class="form-control" id="id_email" value="{{ form.email.value }}">
+            </div>
+        </div>
+        <div class="form-group sity">
+            <label for="id_sity">Адрес</label>
+            <div class="input-group sity">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></div>
+                <input type="text" name="{{ form.address.name }}" class="form-control" id="id_sity" value="{{ form.address.value }}">
+            </div>
+        </div>
+        <div class="form-group phone">
+            <label for="id_phone">Телефон</label>
+            <div class="input-group phone">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></div>
+                <input type="text" name="{{ form.phone.name }}" required="" class="form-control" id="id_phone" value="{{ form.phone.value }}">
+            </div>
+        </div>
+		<button type="submit" class="b-singup_btn">Отредактировать</button>
+	</form>
+    <div>
+{% endblock %}

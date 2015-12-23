@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load humanize %}
+
+{% block content %}
+
+<h2 align='left' class='b-title_active'>Топики юзера</h2>
+<table class='table table-bordered table-striped m-table_active'>
+	<thead>
+		<tr class='active sprite'>
+			<th class='text-left col-xs-1'>Юзер</th>
+			<th class='text-left col-xs-3'>Заголовок темы</th>
+			<th class='col-xs-1 text-center'>Просмотров</th>
+			<th class='col-xs-1 text-center'>Число ап</th>
+			<th class='col-xs-1 text-center'>Последний ап</th>
+            <th class='col-xs-1 text-center'>АПнуть тему</th>
+			<th class='col-xs-1 text-center'>Управление</th>
+		</tr>
+	</thead>
+	{% for topic in topics_active %}
+		<tr class='b-information_list' id='m-inform_list_{{ topic.deleted }} b-topic{{ topic.id }}' data-id='{{ topic.id }} '>
+			<td class='col-xs-1'>{{ topic.login }}</td>
+			<td class='text-left col-xs-3'>
+				<a href='{{ topic.url }}' target="_blank">{{ topic.title }}</a>
+			</td>
+			<td class='col-xs-1 text-center'>{{topic.views}}</td>
+			<td class='col-xs-1 text-center'>{{ topic.count }}</td>
+			<td class='col-xs-1'>
+				<time 
+				datetime='{{ topic.last_up|date:'Y.m.d H:i' }}'
+				title='{{ topic.last_up|date:'Y.m.d H:i' }}'
+				>
+					{% if topic.last_up.year == now.year %}
+						{{ topic.last_up|naturalday|title }} {{ topic.last_up|time:'H:i' }}
+					{% else %}
+						{{ topic.last_up|naturalday:"d E Y" }}
+					{% endif %}
+				</time>
+			</td>
+            <td class='col-xs-1 text-center'><a href="{% url 'diesel_up_force' topic.id %}">ап</a></td>
+			<td class='col-xs-2 control_tab'>
+				<a href='{% url "diesel_up_force" id=topic.id %}' class=' m-sprites public' title='{% trans "Force UP!" %}'>
+					<i class="sprites sprite-up"></i>
+				</a>
+				<a href='{% url 'diesel_up_edit' id=topic.id %}' class='m-sprites b-form__submit' title='{% trans "Edit" %}'>
+					Редактировать
+				</a>
+				<a href='{% url "topic_deleted" id=topic.id %}' title='{% trans "Delete" %}' class="m-sprites b-delet m-deleted_{{ topic.deleted }}">
+					Удалить
+				</a>
+			</td>
+		</tr>
+	{% endfor %}
+</table>
+
+{% endblock %}

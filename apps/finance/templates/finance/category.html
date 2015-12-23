@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>{{ category.title }}</h1>
+    {% for category_item in category.category_items.all %}
+        {% for item in category_item.items.all %}
+            <h4>{{ item.category_item.title }}</h4>
+            <h6>{{ item.money }} {{ item.created|date:'Y-m-d H:i' }}</h6>
+        {% endfor %}
+    {% endfor %}
+{{ total_items }}
+
+{% endblock %}

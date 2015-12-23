@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="b-wrapper m-app_accounts m-template_singup">
+	<h1 class="text-center title_form">Войти</h1>
+    <form method="post" action="/login/" class="form-horizontal form login_form">
+        {% csrf_token %}
+        {{ form.errors }}
+        <div class="form-group">
+            <label for="id_name">Логин или e-mail</label>
+            <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                <input type="text" name="{{ form.username.name }}" required="" class="form-control" id="id_username">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="id_name">Пароль</label>
+            <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+                <input type="password" name="{{ form.password.name }}" required="" class="form-control" id="id_password">
+            </div>
+        </div>
+        <div>
+            <button type="submit">Войти</button>
+        </div>
+	</form>
+
+<div>
+{% endblock %}
