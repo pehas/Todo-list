@@ -39,11 +39,6 @@ AUTHENTICATION_BACKENDS = [
     'apps.accounts.auth.EmailOrUsernameModelBackend'
 ]
 
-PROXY = True
-PROXY_HOST = 'localhost:8000'
-PROXY_TYPE = 'http'
-PROXY_AUTH = 'express:page'
-
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -58,14 +53,15 @@ INSTALLED_APPS = (
 	'django_crontab',
 
     'apps.todo',
-	'apps.diesel',
+
 	'apps.accounts',
 	'apps.finance',
+	'apps.diesel',
+	'apps.chat',
 )
 
 CRONJOBS = [
-	('*/1 * * * *', 'apps.diesel.management.commands.up.up_user'),
-	('*/1 * * * *', 'apps.cron.up_user')
+	('* */1 * * *', 'apps.diesel.management.commands.up.up_user'),
 ]
 
 MIDDLEWARE_CLASSES = (

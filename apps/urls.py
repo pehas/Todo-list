@@ -18,6 +18,8 @@ urlpatterns = patterns('',
 
 	url(r'^diesel-up/', include('apps.diesel.urls')),
 
+	url(r'^chat/', include('apps.chat.urls')),
+
 	url(r'^finance/', include('apps.finance.urls')),
 )
 

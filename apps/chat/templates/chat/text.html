@@ -1,0 +1,11 @@
+<meta http-equiv="refresh" content="10">
+{% for chat in chats %}
+<ul class="media-list">
+    <li class="media">
+        <div class="media-body">
+            <h4 class="media-heading">{{ chat.user }}</h4>
+                {{ chat.text }}
+        </div>
+    </li>
+</ul>
+{% endfor %}

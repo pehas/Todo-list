@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="text" class="form-control" name="{{ form.text.name }}" placeholder="сообщение...">
+    <button type="submit" class="btn btn-default">Отправить</button>
+</form>
+
+<div class="chat"></div>
+
+
+
+<script>
+ $(document).ready(function() {
+   var refreshId = setInterval(function() {
+      $(".chat").load('text');
+   }, 1000);
+   $.ajaxSetup({ cache: false });
+});
+</script>
+{% endblock %}

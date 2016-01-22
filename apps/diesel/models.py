@@ -28,6 +28,7 @@ class Topic(models.Model):
 	count = models.PositiveIntegerField(verbose_name=u'Число апов', default=0, blank=True, editable=False)
 	views = models.PositiveIntegerField(verbose_name=u'Просмотры', null=True, blank=True)
 
+	repeat = models.TimeField(verbose_name=u'Время', default='1:00:00', null=True, blank=True)
 	last_up = models.DateTimeField(verbose_name=u'Последний ап', auto_now=True)
 	created_at = models.DateTimeField(verbose_name=u'Создано', auto_now_add=True)
 	deleted = models.BooleanField(verbose_name=u'Удалить', default=False)

@@ -12,9 +12,9 @@ from ...models import Topic
 
 
 def up_user(login):
-	topics = Topic.objects.all()
+	topics = Topic.objects.filter(login__iexact=login, public=True, deleted=False)
 	for topic in topics:
-		time_to_up = topic.last_up
+		time_to_up = topic.last_up + datetime.timedelta(hours=topic.repeat.hour, minutes=topic.repeat.minute)
 		time_now = timezone.now()
 		if time_to_up < time_now:
 			status = topic.up()
@@ -23,7 +23,6 @@ def up_user(login):
 		print ('%s UP-%s: %s' % (datetime.datetime.now(), status, topic.id))
 		if not status:
 			print topic.url
-
 
 
 class Command(BaseCommand):
